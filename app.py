@@ -1,24 +1,16 @@
-from dotenv import load_dotenv
-import os
-import csv
-import requests
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+import config
+import json
 
 
 def main():
-    print('hi ' + os.getenv('APP_NAME'))
+    print('Hello World. This is your config:')
+    print(json.dumps(config.config, indent=4))
 
 
-def no_env():
-    print('you have no env!')
+def config_missing():
+    print('Please provide config in env.yml')
+    exit(1)
 
 
 if __name__ == '__main__':
-    try:
-        load_dotenv()
-        main()
-    except:
-        no_env()
-        exit(1)
+    main()
