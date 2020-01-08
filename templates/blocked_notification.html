@@ -1,0 +1,28 @@
+<h1>Attention!</h1>
+<p>Hello {{ recipient_name }}. At least one IP that is registered with your Microsoft SNDS account is blocked.</p>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>First IP</th>
+        <th>Last IP</th>
+        <th>Blocked</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in table %}
+        <tr>
+            <td>{{ row.first_ip }}</td>
+            <td>{{ row.last_ip }}</td>
+            <td>{{ row.blocked }}</td>
+            <td>{{ row.details }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<p>
+    You can login at <a href="{{ homepage_url }}">{{ homepage_url }}</a><br>
+    Request delisting at <a href="{{ delisting_url }}">{{ delisting_url }}</a>
+</p>
