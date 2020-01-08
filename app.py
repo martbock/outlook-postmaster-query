@@ -1,10 +1,10 @@
-import config
+from config import Config
 import json
 
 
 def main():
     print('Hello World. This is your config:')
-    print(json.dumps(config.config, indent=4))
+    print(json.dumps(Config().config, indent=4))
 
 
 def config_missing():

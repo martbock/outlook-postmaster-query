@@ -1,0 +1,67 @@
+email:
+  required: true
+  type: dict
+  schema:
+      smtp:
+        required: true
+        type: dict
+        schema:
+          server:
+            required: true
+            type: string
+          port:
+            required: true
+            type: integer
+          user:
+            required: true
+            type: string
+          password:
+            required: true
+            type: string
+      sender:
+        required: true
+        type: dict
+        schema:
+          name:
+            required: true
+            type: string
+          email:
+            required: true
+            type: string
+      recipients:
+        required: true
+        type: list
+        schema:
+          required: true
+          type: dict
+          schema:
+            name:
+              required: true
+              type: string
+            email:
+              required: true
+              type: string
+outlook:
+  required: true
+  type: dict
+  schema:
+    api:
+      required: true
+      type: dict
+      schema:
+        url:
+          required: true
+          type: string
+        key:
+          required: true
+          type: string
+    links:
+      required: true
+      type: dict
+      schema:
+        homepage:
+          required: true
+          type: string
+        delisting:
+          required: true
+          type: string
