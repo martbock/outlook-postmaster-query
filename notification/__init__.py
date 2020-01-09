@@ -1,4 +1,4 @@
-from jinja2 import FileSystemLoader, Environment
+from jinja2 import FileSystemLoader, Environment, select_autoescape
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTP
@@ -9,7 +9,7 @@ class EmailNotifier:
 
     def __init__(self, config):
         file_loader = FileSystemLoader('templates')
-        self.jinja_env = Environment(loader=file_loader)
+        self.jinja_env = Environment(loader=file_loader, autoescape=select_autoescape())
         self.config = config
 
     def render_blocked_notification(self, recipient_name, blocked_result):
