@@ -13,19 +13,25 @@ class App:
     def __init__(self):
         try:
             self.config = Config().config
+            self.notifier = EmailNotifier(self.config)
         except ValidationException as e:
             self.config_invalid(e)
 
     def main(self):
-        notifier = EmailNotifier(self.config)
-        recipient = self.config['email']['recipients'][0]
-        email = notifier.build_email(
-            recipient=recipient,
-            blocked_result=[{'first_ip': '1.1.1.1', 'last_ip': '9.9.9.9', 'blocked': True,
-                             'details': 'Evidence of spamming'}]
-        )
+        # TODO Crawl API
+        blocked_result = [
+            {'first_ip': '1.1.1.1', 'last_ip': '9.9.9.9', 'blocked': True, 'details': 'Evidence of spamming'}
+        ]
+        for recipient in self.config['email']['recipients']:
+            self.notify_via_email(
+                recipient,
+                blocked_result
+            )
+
+    def notify_via_email(self, recipient: dict, blocked_result: list):
+        email = self.notifier.build_email(recipient, blocked_result)
         try:
-            notifier.send(recipient_email=recipient['email'], message=email)
+            self.notifier.send(recipient_email=recipient['email'], message=email)
         except SMTPException as e:
             self.print_error('Sending email failed.', e, yaml_dump=False)
             exit(1)
