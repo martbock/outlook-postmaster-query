@@ -1,0 +1,10 @@
+Attention!
+Hello {{ recipient_name }}. At least one IP that is registered with your Microsoft SNDS account is blocked.
+
+First IP | Last IP | Blocked | Details
+{% for row in table %}
+{{ row.first_ip }} | {{ row.last_ip }} | {{ row.blocked }} | {{ row.details }}
+{% endfor %}
+
+You can login at {{ homepage_url }}
+Request delisting at {{ delisting_url }}

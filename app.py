@@ -1,6 +1,7 @@
 import yaml
 from blessings import Terminal
 from config import Config, ValidationException
+from notification import EmailNotifier
 
 t = Terminal()
 
@@ -14,8 +15,14 @@ class App:
             self.config_invalid(e)
 
     def main(self):
-        print('Hello World. This is your config:')
-        print(yaml.dump(self.config))
+        notifier = EmailNotifier(self.config)
+        email = notifier.build_email(
+            recipient=self.config['email']['recipients'][0],
+            sender=self.config['email']['sender'],
+            blocked_result=[{'first_ip': '1.1.1.1', 'last_ip': '9.9.9.9', 'blocked': True,
+                             'details': 'Evidence of spamming'}]
+        )
+        print(email)
 
     def config_invalid(self, e: ValidationException):
         print(f'{t.red + t.reverse} ERROR {t.normal + t.red} Your configuration is invalid.{t.normal}')
