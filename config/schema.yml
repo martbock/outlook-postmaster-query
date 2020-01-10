@@ -41,6 +41,9 @@ email:
             email:
               required: true
               type: string
+      subject:
+        required: true
+        type: string
 outlook:
   required: true
   type: dict
