@@ -1,7 +1,9 @@
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from smtplib import SMTP
+from smtplib import SMTP, SMTPException
+
+from exceptions import EmailException
 
 
 class EmailNotifier:
@@ -37,14 +39,21 @@ class EmailNotifier:
 
     def send(self, recipient_email: str, message: str):
         """Send an email message to a recipient."""
-        connection = SMTP(
-            host=self.config['email']['smtp']['server'],
-            port=self.config['email']['smtp']['port']
-        )
-        connection.starttls()
-        connection.login(
-            user=self.config['email']['smtp']['user'],
-            password=self.config['email']['smtp']['password']
-        )
-        connection.sendmail(from_addr=self.config['email']['sender']['email'], to_addrs=recipient_email, msg=message)
-        connection.quit()
+        try:
+            connection = SMTP(
+                host=self.config['email']['smtp']['server'],
+                port=self.config['email']['smtp']['port']
+            )
+            connection.starttls()
+            connection.login(
+                user=self.config['email']['smtp']['user'],
+                password=self.config['email']['smtp']['password']
+            )
+            connection.sendmail(
+                from_addr=self.config['email']['sender']['email'],
+                to_addrs=recipient_email,
+                msg=message
+            )
+            connection.quit()
+        except SMTPException as e:
+            raise EmailException(e)
