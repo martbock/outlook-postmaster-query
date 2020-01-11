@@ -1,28 +1,132 @@
-<h1>Attention!</h1>
-<p>Hello {{ recipient_name }}. At least one IP that is registered with your Microsoft SNDS account is blocked.</p>
-<br>
-<table>
-    <thead>
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Attention: Outlook Blocked {{ ip_range_count }} IP range{{ 's' if ip_range_count > 1 }}</title>
+    <!--[if mso]><xml><o:officedocumentsettings><o:pixelsperinch>96</o:pixelsperinch></o:officedocumentsettings></xml><style>table{border-collapse:collapse}a,div,h1,h2,h3,h4,h5,h6,p,td,th{font-family:"Segoe UI",sans-serif;mso-line-height-rule:exactly}</style>
+    <![endif]-->
+    <style>
+        .w:hover {
+            background-color: #3182ce !important
+        }
+
+        .z9:hover {
+            text-decoration: none !important
+        }
+
+        @media screen {
+            img {
+                max-width: 100%
+            }
+
+            .z {
+                font-family: BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            u ~ div .j {
+                min-width: 100vw
+            }
+
+            .t {
+                height: 32px !important
+            }
+
+            .q {
+                padding-top: 6px !important;
+                padding-bottom: 6px !important
+            }
+
+            .s {
+                padding-left: 24px !important;
+                padding-right: 24px !important
+            }
+
+            .e {
+                width: 100% !important
+            }
+        }</style>
+</head>
+<body
+        style="margin:0;padding:0;width:100%;background-color:#edf2f7;word-break:break-word;-webkit-font-smoothing:antialiased">
+<table class="j z" width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tr>
-        <th>First IP</th>
-        <th>Last IP</th>
-        <th>Blocked</th>
-        <th>Details</th>
+        <td align="center" style="vertical-align:middle" valign="middle">
+            <table class="e" width="600" cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                    <td class="q" style="padding-top:12px;padding-bottom:12px"></td>
+                </tr>
+                <tr>
+                    <td align="center" class="s">
+                        <table
+                                width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                            <tr>
+                                <td class="s"
+                                    style="border-radius:8px;line-height:24px;padding:48px;color:#1a202c;font-size:16px"
+                                    bgcolor="#f7fafc"><p style="font-weight:600;margin:0;color:#000;font-size:20px">
+                                    Attention: Outlook Blocked {{ ip_range_count }} IP
+                                    range{{ 's' if ip_range_count > 1 }}</p>
+                                    <p>Hi {{ recipient_name }},</p>
+                                    <p>The following {{ ip_range_count }} IP range{{ 's' if ip_range_count > 1 }} that
+                                        are associated with your account at Outlook's <em>Smart Network Data
+                                            Service</em> have been blocked. To learn more, visit the <a
+                                                href="{{ homepage_url }}"
+                                                class="z9" style="color:#3182ce">SNDS website</a>.</p>
+                                    <table align="center" style="padding-top:12px;padding-bottom:12px" width="100%"
+                                           cellpadding="0" cellspacing="0" role="presentation">
+                                        <tr>
+                                            <th style="padding-top:8px;padding-right:8px;padding-bottom:8px;text-align:left"
+                                                align="left">First&nbsp;IP
+                                            </th>
+                                            <th style="padding:8px;text-align:left" align="left">Last&nbsp;IP</th>
+                                            <th style="padding:8px;text-align:left" align="left">Blocked</th>
+                                            <th
+                                                    style="padding-top:8px;padding-bottom:8px;padding-left:8px;text-align:left"
+                                                    align="left">Details
+                                            </th>
+                                        </tr>
+                                        {% for row in table %}
+                                            <tr>
+                                                <td style="padding-top:8px;padding-right:8px;padding-bottom:8px">
+                                                    {{ row.first_ip }}
+                                                </td>
+                                                <td style="padding:8px">{{ row.last_ip }}</td>
+                                                <td style="padding:8px">{{ row.blocked }}</td>
+                                                <td style="padding-top:8px;padding-right:8px;padding-bottom:8px">
+                                                    {{ row.details }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                    <p>To avoid having your emails rejected by Outlook, you have to <strong>manually
+                                        request delisting</strong>. Do that as early as possible since their support
+                                        will typically require multiple hours to respond.</p>
+                                    <div class="t" style="line-height:12px">&zwnj;</div>
+                                    <table align="center" cellpadding="0" cellspacing="0" role="presentation">
+                                        <tr>
+                                            <td align="center" class="w"
+                                                style="mso-padding-alt:8px 24px 16px;border-radius:4px;color:#fff"
+                                                bgcolor="#4299e1"><a href="{{ delisting_url }}"
+                                                                     style="display:inline-block;font-weight:600;padding-top:16px;padding-bottom:16px;padding-left:24px;padding-right:24px;color:#fff;font-size:14px;text-decoration:none">Request
+                                                Delisting</a></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:24px;text-align:center;color:#718096;font-size:12px" align="center">
+                                    <p style="margin:0">This email was automatically generated.</p></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
     </tr>
-    </thead>
-    <tbody>
-    {% for row in table %}
-        <tr>
-            <td>{{ row.first_ip }}</td>
-            <td>{{ row.last_ip }}</td>
-            <td>{{ row.blocked }}</td>
-            <td>{{ row.details }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
 </table>
-<br>
-<p>
-    You can login at <a href="{{ homepage_url }}">{{ homepage_url }}</a><br>
-    Request delisting at <a href="{{ delisting_url }}">{{ delisting_url }}</a>
-</p>
+</body>
+</html>

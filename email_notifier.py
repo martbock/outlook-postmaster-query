@@ -20,6 +20,7 @@ class EmailNotifier:
         return template.render(
             recipient_name=recipient_name,
             table=blocked_result,
+            ip_range_count=len(blocked_result),
             homepage_url=self.config['outlook']['links']['homepage'],
             delisting_url=self.config['outlook']['links']['delisting'],
         )
