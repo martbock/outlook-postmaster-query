@@ -1,10 +1,23 @@
-Attention!
-Hello {{ recipient_name }}. At least one IP that is registered with your Microsoft SNDS account is blocked.
+**Attention: Outlook Blocked {{ ip_range_count }} IP Range{{ 's' if ip_range_count > 1 }}**
+
+Hi {{ recipient_name }},
+
+The following{{ ' ' + ip_range_count if ip_range_count > 1 }} IP range{{ 's' if ip_range_count > 1 }} that {{ 'are' if ip_range_count > 1 else 'is' }}
+associated with your account at Outlook's Smart Network Data Service {{ 'have' if ip_range_count > 1 else 'has' }} been blocked.
+To learn more, visit the SNDS website at:
+{{ homepage_url }}
 
 First IP | Last IP | Blocked | Details
 {% for row in table %}
 {{ row.first_ip }} | {{ row.last_ip }} | {{ row.blocked }} | {{ row.details }}
 {% endfor %}
 
-You can login at {{ homepage_url }}
-Request delisting at {{ delisting_url }}
+To avoid having your emails rejected by Outlook, you have to manually request delisting.
+Do that as early as possible since their support will typically require multiple hours to respond.
+
+Request delisting at:
+{{ delisting_url }}
+
+---
+
+This email was automatically generated.

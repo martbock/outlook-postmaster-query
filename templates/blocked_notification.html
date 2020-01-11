@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="x-apple-disable-message-reformatting">
-    <title>Attention: Outlook Blocked {{ ip_range_count }} IP range{{ 's' if ip_range_count > 1 }}</title>
+    <title>Attention: Outlook Blocked {{ ip_range_count }} IP Range{{ 's' if ip_range_count > 1 }}</title>
     <!--[if mso]><xml><o:officedocumentsettings><o:pixelsperinch>96</o:pixelsperinch></o:officedocumentsettings></xml><style>table{border-collapse:collapse}a,div,h1,h2,h3,h4,h5,h6,p,td,th{font-family:"Segoe UI",sans-serif;mso-line-height-rule:exactly}</style>
     <![endif]-->
     <style>
@@ -69,11 +69,11 @@
                                     style="border-radius:8px;line-height:24px;padding:48px;color:#1a202c;font-size:16px"
                                     bgcolor="#f7fafc"><p style="font-weight:600;margin:0;color:#000;font-size:20px">
                                     Attention: Outlook Blocked {{ ip_range_count }} IP
-                                    range{{ 's' if ip_range_count > 1 }}</p>
+                                    Range{{ 's' if ip_range_count > 1 }}</p>
                                     <p>Hi {{ recipient_name }},</p>
-                                    <p>The following {{ ip_range_count }} IP range{{ 's' if ip_range_count > 1 }} that
-                                        are associated with your account at Outlook's <em>Smart Network Data
-                                            Service</em> have been blocked. To learn more, visit the <a
+                                    <p>The following{{ ' ' + ip_range_count if ip_range_count > 1 }} IP range{{ 's' if ip_range_count > 1 }} that
+                                        {{ 'are' if ip_range_count > 1 else 'is' }} associated with your account at Outlook's <em>Smart Network Data
+                                            Service</em> {{ 'have' if ip_range_count > 1 else 'has' }} been blocked. To learn more, visit the <a
                                                 href="{{ homepage_url }}"
                                                 class="z9" style="color:#3182ce">SNDS website</a>.</p>
                                     <table align="center" style="padding-top:12px;padding-bottom:12px" width="100%"
