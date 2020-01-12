@@ -1,7 +1,8 @@
 # Outlook Postmaster Query
 
 This Python script makes it easy to discover if your outgoing SMTP server is being blocked by Microsoft's 
-**Outlook.com** email infrastructure.
+**Outlook.com** email infrastructure. It queries the _Smart Network Data Service_ API and alerts you via email if
+any of your SMTP servers are blacklisted by Microsoft.
 
 ## Motivation
 
