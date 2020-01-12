@@ -23,3 +23,30 @@ The first step is to register at Outlook.com's _Smart Network Data Service_ on t
 the _Request Access_ tab. Now go to the _Edit Profile_ tab and click on the link to change your 
 **automated access settings** under _Automated Access_. Enable automated access and save the API key that is generated.
 The API key's format looks like this: `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`
+
+## Installation
+
+To install the software, you have to perform the following steps:
+
+1. Clone the repository.
+    ```bash
+    git clone https://github.com/martbock/outlook-postmaster-query.git
+    cd outlook-postmaster-query/
+    ```
+2. Create a virtual environment, activate it and install the dependencies.
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    ```
+3. Copy the `env.example.yml` file to `env.yml`. This yaml-formatted file holds your specific configuration.
+    ```bash
+    cp env.example.yml env.yml
+    nano env.yml
+    ```
+4. Enter the API Key at the config path `outlook.api.key`.
+5. Run the script to check for syntactical correctness of your configuration file.
+    ```bash
+    python3 app.py
+    ```
+6. Create a cron job for automatically running the query.
