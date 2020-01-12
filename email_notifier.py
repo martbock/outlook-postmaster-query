@@ -34,8 +34,8 @@ class EmailNotifier:
         message['To'] = f"{recipient['name']} <{recipient['email']}>"
         html = self._render_blocked_notification(self.BLOCKED_TEMPLATE['html'], recipient['name'], blocked_result)
         txt = self._render_blocked_notification(self.BLOCKED_TEMPLATE['txt'], recipient['name'], blocked_result)
-        message.attach(MIMEText(html, 'html', _charset='utf-8' if not html.isascii() else None))
         message.attach(MIMEText(txt, 'plain', _charset='utf-8' if not html.isascii() else None))
+        message.attach(MIMEText(html, 'html', _charset='utf-8' if not html.isascii() else None))
         return message.as_string()
 
     def send(self, recipient_email: str, message: str):

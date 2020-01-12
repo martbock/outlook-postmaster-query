@@ -23,7 +23,12 @@
             }
 
             .z {
-                font-family: BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+                font-family: BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+            }
+
+            .y {
+                font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+                font-size: .9em;
             }
         }
 
@@ -80,9 +85,8 @@
                                            cellpadding="0" cellspacing="0" role="presentation">
                                         <tr>
                                             <th style="padding-top:8px;padding-right:8px;padding-bottom:8px;text-align:left"
-                                                align="left">First&nbsp;IP
+                                                align="left">IP&nbsp;Range
                                             </th>
-                                            <th style="padding:8px;text-align:left" align="left">Last&nbsp;IP</th>
                                             <th style="padding:8px;text-align:left" align="left">Blocked</th>
                                             <th
                                                     style="padding-top:8px;padding-bottom:8px;padding-left:8px;text-align:left"
@@ -91,10 +95,9 @@
                                         </tr>
                                         {% for row in table %}
                                             <tr>
-                                                <td style="padding-top:8px;padding-right:8px;padding-bottom:8px">
-                                                    {{ row.first_ip }}
+                                                <td style="padding-top:8px;padding-right:8px;padding-bottom:8px" class="y">
+                                                    {{ row.first_ip }}{{ ' – ' + row.last_ip if row.first_ip != row.last_ip }}
                                                 </td>
-                                                <td style="padding:8px">{{ row.last_ip }}</td>
                                                 <td style="padding:8px">{{ row.blocked }}</td>
                                                 <td style="padding-top:8px;padding-right:8px;padding-bottom:8px">
                                                     {{ row.details }}
