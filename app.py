@@ -4,6 +4,7 @@ from blessings import Terminal
 from exceptions import CrawlException, EmailException, ValidationException
 from email_notifier import EmailNotifier
 from crawler import Crawler
+from time import sleep
 
 t = Terminal()
 
@@ -34,6 +35,7 @@ class App:
             return exit(0)
         for recipient in self.config['email']['recipients']:
             self.notify_via_email(recipient, blocked_result)
+            sleep(5)
 
     def notify_via_email(self, recipient: dict, blocked_result: list):
         """Notify a recipient about blocked IPs."""
