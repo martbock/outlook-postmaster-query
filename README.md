@@ -51,3 +51,19 @@ To install the software, you have to perform the following steps:
     python3 app.py
     ```
 6. Create a cron job for automatically running the query.
+
+## Example Notification
+
+When the script detects that one of your IPs is blocked, it will notify the recipients configured in your `.env` via email:
+
+```yaml
+recipients:
+- name: Jane Doe
+  email: jane.doe@example.com
+- name: Jon Doe
+  email: jon.doe@example.com
+```
+
+The notification looks something like this:
+
+![Screenshot](screenshot.png)
