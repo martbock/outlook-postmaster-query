@@ -18,7 +18,6 @@ class Crawler:
         except (BaseHTTPError, ConnectionError) as e:
             raise CrawlException(e)
         raw_csv = response.text
-        raw_csv = '1.1.1.1,9.9.9.9,Yes,Blocked bla bla bla'
         csv_reader = csv.reader(raw_csv.splitlines(), delimiter=',')
         return [{
             'first_ip': row[0],
