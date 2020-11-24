@@ -1,7 +1,7 @@
 import csv
 import requests
-from requests.exceptions import BaseHTTPError, ConnectionError
-
+import itertools
+from requests.exceptions import ConnectionError, HTTPError
 from exceptions import CrawlException
 
 
@@ -15,13 +15,17 @@ class Crawler:
         c = self.config['outlook']['api']
         try:
             response = requests.get(f"{c['url']}?key={c['key']}")
-        except (BaseHTTPError, ConnectionError) as e:
+            response.raise_for_status()
+        except (ConnectionError, HTTPError) as e:
             raise CrawlException(e)
         raw_csv = response.text
-        csv_reader = csv.reader(raw_csv.splitlines(), delimiter=',')
+        validation_reader, result_reader = itertools.tee(csv.reader(raw_csv.splitlines(), delimiter=','))
+        for row in validation_reader:
+            if type(row) is not list or len(row) != 4:
+                raise CrawlException("Failed to parse response")
         return [{
             'first_ip': row[0],
             'last_ip': row[1],
             'blocked': row[2],
             'details': row[3]
-        } for row in csv_reader]
+        } for row in result_reader]
